@@ -19,4 +19,5 @@ extends:
   - 'plugin:jest/recommended'
 
 rules:
+  import/extensions: always
   no-console: 0
