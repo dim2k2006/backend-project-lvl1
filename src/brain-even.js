@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import random from 'lodash/random';
+import random from 'lodash/random.js';
 import { say } from './cli.js';
 
 const attempts = 3;
@@ -39,7 +39,7 @@ const game = (user) => {
 
     const data = genData(random(1, 100));
 
-    round(data.question, data.answer);
+    round(data.question, data.answer, attempt + 1);
   };
 
   const data = genData(random(1, 100));
