@@ -2,8 +2,12 @@
 
 import { greet, getUserName, say } from '../src/cli.js';
 
-say('Welcome to the Brain Games!');
+const init = () => {
+  say('Welcome to the Brain Games!');
 
-const userName = getUserName();
+  const userName = getUserName();
 
-greet(userName);
+  greet(userName);
+};
+
+init();
