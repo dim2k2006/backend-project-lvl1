@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import engine from '../src/index.js';
-import game from '../src/brain-even.js';
+import game from '../src/games/brain-even.js';
 import { greet, getUserName, say } from '../src/cli.js';
 
 const init = () => {
