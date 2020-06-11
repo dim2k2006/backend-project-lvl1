@@ -1,5 +1,6 @@
 import random from 'lodash/random.js';
 import range from 'lodash/range.js';
+import toNumber from 'lodash/toNumber.js';
 
 const step = 2;
 
@@ -12,12 +13,16 @@ const game = ({
   genQuestion: () => {
     const randomIndex = random(0, limit - 1);
 
-    const sequence = range(random(1, 50), limit, step)
+    const start = random(1, 50);
+    const end = start + limit * 2;
+
+    const sequence = range(start, end, step)
       .map((number, idx) => {
         if (idx === randomIndex) return placeholder;
 
         return number;
-      });
+      })
+      .join(' ');
 
     return sequence;
   },
@@ -28,12 +33,12 @@ const game = ({
       const item = list[pointer];
       const prevItem = list[pointer - 1];
 
-      if (item === placeholder) return prevItem + step;
+      if (item === placeholder) return toNumber(prevItem) + step;
 
       return iter(list, pointer + 1);
     };
 
-    return iter(sequence, 0);
+    return iter(sequence.split(' '), 0);
   },
 });
 
