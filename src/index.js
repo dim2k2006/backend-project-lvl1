@@ -1,15 +1,26 @@
 import readlineSync from 'readline-sync';
 import toString from 'lodash/toString.js';
-import { say } from './cli.js';
+import {
+  say,
+  getUserName,
+  greet,
+  welcome,
+} from './cli.js';
 
 const rounds = 3;
 
-const engine = (user, description, genQuestion, genAnswer) => {
+const engine = (description, genQuestion, genAnswer) => {
+  welcome();
+
+  const userName = getUserName();
+
+  greet(userName);
+
   say(description);
 
   const round = (question, answer, attempt) => {
     if (attempt > rounds) {
-      say(`Congratulations, ${user}!`);
+      say(`Congratulations, ${userName}!`);
 
       return;
     }
@@ -21,7 +32,7 @@ const engine = (user, description, genQuestion, genAnswer) => {
     if (toString(userAnswer) !== toString(answer)) {
       say(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}".`);
 
-      say(`Let's try again, ${user}!`);
+      say(`Let's try again, ${userName}!`);
 
       return;
     }
