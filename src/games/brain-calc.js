@@ -19,16 +19,24 @@ const genOperator = () => getOperator(random(0, 2));
 
 const genNumber = () => random(1, 10);
 
+const genQuestion = () => {
+  const operand1 = genNumber();
+  const operand2 = genNumber();
+  const operator = genOperator();
+
+  return `${operand1} ${operator} ${operand2}`;
+};
+
+const genAnswer = expression => exprEval.Parser.evaluate(expression);
+
 const game = ({
   description: 'What is the result of the expression?',
-  genQuestion: () => {
-    const operand1 = genNumber();
-    const operand2 = genNumber();
-    const operator = genOperator();
+  genData: () => {
+    const question = genQuestion();
+    const answer = genAnswer(question);
 
-    return `${operand1} ${operator} ${operand2}`;
+    return { question, answer };
   },
-  genAnswer: expression => exprEval.Parser.evaluate(expression),
 });
 
 export default game;
