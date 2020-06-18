@@ -1,7 +1,5 @@
 import random from 'lodash/random.js';
 
-const genNumber = () => random(1, 100);
-
 const gcd = (x, y) => {
   if (x === 0) return y;
 
@@ -12,7 +10,7 @@ const gcd = (x, y) => {
   return gcd(x, y % x);
 };
 
-const genQuestion = () => `${genNumber()} ${genNumber()}`;
+const genQuestion = () => `${random(1, 100)} ${random(1, 100)}`;
 
 const genAnswer = (numbers) => {
   const [x, y] = numbers.split(' ');
