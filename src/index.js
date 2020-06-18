@@ -9,7 +9,7 @@ import {
 
 const rounds = 3;
 
-const engine = (description, genQuestion, genAnswer) => {
+const engine = (description, genData) => {
   welcome();
 
   const userName = getUserName();
@@ -39,14 +39,12 @@ const engine = (description, genQuestion, genAnswer) => {
 
     say('Correct!');
 
-    const nextQuestion = genQuestion();
-    const nextAnswer = genAnswer(nextQuestion);
+    const { question: nextQuestion, answer: nextAnswer } = genData();
 
     round(nextQuestion, nextAnswer, attempt + 1);
   };
 
-  const question = genQuestion();
-  const answer = genAnswer(question);
+  const { question, answer } = genData();
 
   round(question, answer, 1);
 };
