@@ -1,5 +1,5 @@
 import random from 'lodash/random.js';
-import exprEval from 'expr-eval';
+import toNumber from 'lodash/toNumber.js';
 
 const operatorsMap = {
   0: '+',
@@ -27,7 +27,27 @@ const genQuestion = () => {
   return `${operand1} ${operator} ${operand2}`;
 };
 
-const genAnswer = expression => exprEval.Parser.evaluate(expression);
+const processMap = {
+  '+': (operand1, operand2) => operand1 + operand2,
+  '-': (operand1, operand2) => operand1 - operand2,
+  '*': (operand1, operand2) => operand1 * operand2,
+};
+
+const getProcess = (operator) => {
+  const process = processMap[operator];
+
+  if (!process) throw new Error('Provide correct operator.');
+
+  return process;
+};
+
+const genAnswer = (expression) => {
+  const [operand1, operator, operand2] = expression.split(' ');
+
+  const process = getProcess(operator);
+
+  return process(toNumber(operand1), toNumber(operand2));
+};
 
 const game = ({
   description: 'What is the result of the expression?',
