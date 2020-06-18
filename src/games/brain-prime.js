@@ -16,10 +16,18 @@ const isPrime = (number) => {
   return iter(2);
 };
 
+const genQuestion = () => random(1, 100);
+
+const genAnswer = number => (isPrime(number) ? 'yes' : 'no');
+
 const game = ({
   description: 'Answer "yes" if given number is prime. Otherwise answer "no".',
-  genQuestion: () => random(1, 100),
-  genAnswer: number => (isPrime(number) ? 'yes' : 'no'),
+  genData: () => {
+    const question = genQuestion();
+    const answer = genAnswer(question);
+
+    return { question, answer };
+  },
 });
 
 export default game;
