@@ -17,11 +17,9 @@ const getOperator = (id) => {
 
 const genOperator = () => getOperator(random(0, 2));
 
-const genNumber = () => random(1, 10);
-
 const genQuestion = () => {
-  const operand1 = genNumber();
-  const operand2 = genNumber();
+  const operand1 = random(1, 10);
+  const operand2 = random(1, 10);
   const operator = genOperator();
 
   return `${operand1} ${operator} ${operand2}`;
