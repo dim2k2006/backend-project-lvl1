@@ -4,7 +4,7 @@ import engine from '../src/index.js';
 import game from '../src/games/brain-gcd.js';
 
 const init = () => {
-  engine(game.description, game.genQuestion, game.genAnswer);
+  engine(game.description, game.genData);
 };
 
 init();
