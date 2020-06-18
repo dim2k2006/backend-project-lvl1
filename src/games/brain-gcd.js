@@ -12,13 +12,21 @@ const gcd = (x, y) => {
   return gcd(x, y % x);
 };
 
+const genQuestion = () => `${genNumber()} ${genNumber()}`;
+
+const genAnswer = (numbers) => {
+  const [x, y] = numbers.split(' ');
+
+  return gcd(x, y);
+};
+
 const game = ({
   description: 'Find the greatest common divisor of given numbers.',
-  genQuestion: () => `${genNumber()} ${genNumber()}`,
-  genAnswer: (numbers) => {
-    const [x, y] = numbers.split(' ');
+  genData: () => {
+    const question = genQuestion();
+    const answer = genAnswer(question);
 
-    return gcd(x, y);
+    return { question, answer };
   },
 });
 
