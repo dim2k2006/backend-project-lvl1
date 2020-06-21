@@ -1,50 +1,39 @@
 import random from 'lodash/random.js';
-import range from 'lodash/range.js';
-import toNumber from 'lodash/toNumber.js';
-
-const step = 2;
-
-const limit = 10;
 
 const placeholder = '..';
 
-const genQuestion = () => {
-  const randomIndex = random(0, limit - 1);
+const genSequence = (start, diff, limit) => {
+  const iter = (acc, i) => {
+    if (i === limit) return acc;
 
-  const start = random(1, 50);
-  const end = start + limit * 2;
-
-  const sequence = range(start, end, step)
-    .map((number, idx) => {
-      if (idx === randomIndex) return placeholder;
-
-      return number;
-    })
-    .join(' ');
-
-  return sequence;
-};
-
-const genAnswer = (sequence) => {
-  const iter = (list, pointer) => {
-    if (pointer > list.length) return null;
-
-    const item = list[pointer];
-    const prevItem = list[pointer - 1];
-
-    if (item === placeholder) return toNumber(prevItem) + step;
-
-    return iter(list, pointer + 1);
+    return iter([...acc, start + diff * i], i + 1);
   };
 
-  return iter(sequence.split(' '), 0);
+  return iter([start], 1);
 };
+
+const genQuestion = (sequence, index) => sequence
+  .map((item, idx) => {
+    if (idx === index) return placeholder;
+
+    return item;
+  })
+  .join(' ');
 
 const game = ({
   description: 'What number is missing in the progression?',
   genData: () => {
-    const question = genQuestion();
-    const answer = genAnswer(question);
+    const step = 2;
+    const limit = 10;
+    const start = random(1, 50);
+
+    const sequence = genSequence(start, step, limit);
+
+    const randomIndex = random(0, sequence.length - 1);
+
+    const question = genQuestion(sequence, randomIndex);
+
+    const answer = start + step * randomIndex;
 
     return { question, answer };
   },
