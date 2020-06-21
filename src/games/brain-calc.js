@@ -3,11 +3,11 @@ import keys from 'lodash/keys.js';
 import find from 'lodash/find.js';
 import get from 'lodash/get.js';
 
-const operatorsMap = {
-  0: { operator: '+', process: (operand1, operand2) => operand1 + operand2 },
-  1: { operator: '-', process: (operand1, operand2) => operand1 - operand2 },
-  2: { operator: '*', process: (operand1, operand2) => operand1 * operand2 },
-};
+const operatorsMap = [
+  { operator: '+', process: (operand1, operand2) => operand1 + operand2 },
+  { operator: '-', process: (operand1, operand2) => operand1 - operand2 },
+  { operator: '*', process: (operand1, operand2) => operand1 * operand2 },
+];
 
 const getOperator = (id) => {
   const item = operatorsMap[id];
@@ -19,11 +19,10 @@ const getOperator = (id) => {
   return operator;
 };
 
-const genOperator = () => getOperator(random(0, 2));
+const genOperator = () => getOperator(random(0, operatorsMap.length - 1));
 
 const getProcess = (operator) => {
-  const id = find(keys(operatorsMap), key => get(operatorsMap, `${key}.operator`) === operator);
-  const item = operatorsMap[id];
+  const item = find(operatorsMap, i => i.operator === operator);
 
   const process = get(item, 'process');
 
