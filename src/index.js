@@ -7,7 +7,7 @@ import {
   welcome,
 } from './cli.js';
 
-const rounds = 3;
+const roundsCount = 3;
 
 const engine = ({ description, genData }) => {
   welcome();
@@ -19,7 +19,7 @@ const engine = ({ description, genData }) => {
   say(description);
 
   const round = (question, answer, attempt) => {
-    if (attempt > rounds) {
+    if (attempt > roundsCount) {
       say(`Congratulations, ${userName}!`);
 
       return;
