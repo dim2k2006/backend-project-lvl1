@@ -9,7 +9,7 @@ import {
 
 const rounds = 3;
 
-const engine = (description, genData) => {
+const engine = ({ description, genData }) => {
   welcome();
 
   const userName = getUserName();
