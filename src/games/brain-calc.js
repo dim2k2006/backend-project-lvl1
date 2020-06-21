@@ -1,14 +1,18 @@
 import random from 'lodash/random.js';
-import toNumber from 'lodash/toNumber.js';
+import keys from 'lodash/keys.js';
+import find from 'lodash/find.js';
+import get from 'lodash/get.js';
 
 const operatorsMap = {
-  0: '+',
-  1: '-',
-  2: '*',
+  0: { operator: '+', process: (operand1, operand2) => operand1 + operand2 },
+  1: { operator: '-', process: (operand1, operand2) => operand1 - operand2 },
+  2: { operator: '*', process: (operand1, operand2) => operand1 * operand2 },
 };
 
 const getOperator = (id) => {
-  const operator = operatorsMap[id];
+  const item = operatorsMap[id];
+
+  const operator = get(item, 'operator');
 
   if (!operator) throw new Error('Provide correct operator id.');
 
@@ -17,41 +21,31 @@ const getOperator = (id) => {
 
 const genOperator = () => getOperator(random(0, 2));
 
-const genQuestion = () => {
-  const operand1 = random(1, 10);
-  const operand2 = random(1, 10);
-  const operator = genOperator();
-
-  return `${operand1} ${operator} ${operand2}`;
-};
-
-const processMap = {
-  '+': (operand1, operand2) => operand1 + operand2,
-  '-': (operand1, operand2) => operand1 - operand2,
-  '*': (operand1, operand2) => operand1 * operand2,
-};
-
 const getProcess = (operator) => {
-  const process = processMap[operator];
+  const id = find(keys(operatorsMap), key => get(operatorsMap, `${key}.operator`) === operator);
+  const item = operatorsMap[id];
+
+  const process = get(item, 'process');
 
   if (!process) throw new Error('Provide correct operator.');
 
   return process;
 };
 
-const genAnswer = (expression) => {
-  const [operand1, operator, operand2] = expression.split(' ');
-
+const genAnswer = (operand1, operand2, operator) => {
   const process = getProcess(operator);
 
-  return process(toNumber(operand1), toNumber(operand2));
+  return process(operand1, operand2);
 };
 
 const game = ({
   description: 'What is the result of the expression?',
   genData: () => {
-    const question = genQuestion();
-    const answer = genAnswer(question);
+    const operand1 = random(1, 10);
+    const operand2 = random(1, 10);
+    const operator = genOperator();
+    const question = `${operand1} ${operator} ${operand2}`;
+    const answer = genAnswer(operand1, operand2, operator);
 
     return { question, answer };
   },
