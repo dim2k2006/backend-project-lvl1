@@ -1,30 +1,24 @@
 import random from 'lodash/random.js';
 
-const isPrime = (number) => {
-  if (number < 2) return false;
+const smallestDivisor = (x) => {
+  const iter = (n, testDivisor) => {
+    if (testDivisor * testDivisor > n) return n;
 
-  const limit = number - 1;
+    if (n % testDivisor === 0) return testDivisor;
 
-  const iter = (i) => {
-    if (i > limit) return true;
-
-    if (number % i === 0) return false;
-
-    return iter(i + 1);
+    return iter(n, testDivisor + 1);
   };
 
-  return iter(2);
+  return iter(x, 2);
 };
 
-const genQuestion = () => random(1, 100);
-
-const genAnswer = number => (isPrime(number) ? 'yes' : 'no');
+const isPrime = x => x === smallestDivisor(x);
 
 const game = ({
   description: 'Answer "yes" if given number is prime. Otherwise answer "no".',
   genData: () => {
-    const question = genQuestion();
-    const answer = genAnswer(question);
+    const question = random(1, 100);
+    const answer = isPrime(question) ? 'yes' : 'no';
 
     return { question, answer };
   },
