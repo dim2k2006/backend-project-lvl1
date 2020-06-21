@@ -10,19 +10,13 @@ const gcd = (x, y) => {
   return gcd(x, y % x);
 };
 
-const genQuestion = () => `${random(1, 100)} ${random(1, 100)}`;
-
-const genAnswer = (numbers) => {
-  const [x, y] = numbers.split(' ');
-
-  return gcd(x, y);
-};
-
 const game = ({
   description: 'Find the greatest common divisor of given numbers.',
   genData: () => {
-    const question = genQuestion();
-    const answer = genAnswer(question);
+    const x = random(1, 100);
+    const y = random(1, 100);
+    const question = `${x} ${y}`;
+    const answer = gcd(x, y);
 
     return { question, answer };
   },
