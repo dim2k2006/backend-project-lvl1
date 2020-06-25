@@ -9,7 +9,7 @@ const genSequence = (start, diff, limit) => {
     return iter([...acc, start + diff * i], i + 1);
   };
 
-  return iter([start], 1);
+  return iter([], 0);
 };
 
 const genQuestion = (sequence, index) => sequence
