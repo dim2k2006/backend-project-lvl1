@@ -14,7 +14,7 @@ const engine = ({ description, generateData }) => {
 
   say(description);
 
-  const startRound = (question, answer, attempt) => {
+  const runRound = (question, answer, attempt) => {
     if (attempt > roundsCount) {
       say(`Congratulations, ${userName}!`);
 
@@ -37,12 +37,12 @@ const engine = ({ description, generateData }) => {
 
     const { question: nextQuestion, answer: nextAnswer } = generateData();
 
-    startRound(nextQuestion, nextAnswer, attempt + 1);
+    runRound(nextQuestion, nextAnswer, attempt + 1);
   };
 
   const { question, answer } = generateData();
 
-  startRound(question, answer, 1);
+  runRound(question, answer, 1);
 };
 
 export default engine;
