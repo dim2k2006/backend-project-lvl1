@@ -1,6 +1,6 @@
 import random from 'lodash/random.js';
 
-const smallestDivisor = (x) => {
+const getSmallestDivisor = (x) => {
   const iter = (n, testDivisor) => {
     if (testDivisor * testDivisor > n) return n;
 
@@ -12,7 +12,7 @@ const smallestDivisor = (x) => {
   return iter(x, 2);
 };
 
-const isPrime = x => x === smallestDivisor(x);
+const isPrime = x => x === getSmallestDivisor(x);
 
 const game = ({
   description: 'Answer "yes" if given number is prime. Otherwise answer "no".',
