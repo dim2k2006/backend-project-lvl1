@@ -1,4 +1,5 @@
 import random from 'lodash/random.js';
+import toString from 'lodash/toString.js';
 
 const gcd = (x, y) => {
   if (x === 0) return y;
@@ -18,7 +19,7 @@ const game = ({
     const question = `${x} ${y}`;
     const answer = gcd(x, y);
 
-    return { question, answer };
+    return { question, answer: toString(answer) };
   },
 });
 
