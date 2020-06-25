@@ -1,20 +1,16 @@
 import readlineSync from 'readline-sync';
 import toString from 'lodash/toString.js';
-import {
-  say,
-  getUserName,
-  greet,
-  welcome,
-} from './cli.js';
 
 const roundsCount = 3;
 
+const say = console.log;
+
 const engine = ({ description, generateData }) => {
-  welcome();
+  say('Welcome to the Brain Games!');
 
-  const userName = getUserName();
+  const userName = readlineSync.question('May I have your name? ');
 
-  greet(userName);
+  say(`Hello, ${userName}!`);
 
   say(description);
 
