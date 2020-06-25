@@ -12,7 +12,7 @@ const gcd = (x, y) => {
 
 const game = ({
   description: 'Find the greatest common divisor of given numbers.',
-  genData: () => {
+  generateData: () => {
     const x = random(1, 100);
     const y = random(1, 100);
     const question = `${x} ${y}`;

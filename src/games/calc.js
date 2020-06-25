@@ -38,7 +38,7 @@ const genAnswer = (operand1, operand2, operator) => {
 
 const game = ({
   description: 'What is the result of the expression?',
-  genData: () => {
+  generateData: () => {
     const operand1 = random(1, 10);
     const operand2 = random(1, 10);
     const operator = genOperator();
