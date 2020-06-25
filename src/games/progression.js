@@ -23,7 +23,7 @@ const genQuestion = (sequence, index) => sequence
 const game = ({
   description: 'What number is missing in the progression?',
   generateData: () => {
-    const step = 2;
+    const step = random(1, 5);
     const limit = 10;
     const start = random(1, 50);
 
