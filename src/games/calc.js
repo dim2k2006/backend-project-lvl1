@@ -1,6 +1,7 @@
 import random from 'lodash/random.js';
 import find from 'lodash/find.js';
 import get from 'lodash/get.js';
+import toString from 'lodash/toString.js';
 
 const operations = [
   { operator: '+', process: (operand1, operand2) => operand1 + operand2 },
@@ -45,7 +46,7 @@ const game = ({
     const question = `${operand1} ${operator} ${operand2}`;
     const answer = genAnswer(operand1, operand2, operator);
 
-    return { question, answer };
+    return { question, answer: toString(answer) };
   },
 });
 

@@ -1,5 +1,4 @@
 import readlineSync from 'readline-sync';
-import toString from 'lodash/toString.js';
 
 const roundsCount = 3;
 
@@ -25,7 +24,7 @@ const engine = ({ description, generateData }) => {
 
     const userAnswer = readlineSync.question('Your answer: ');
 
-    if (toString(userAnswer) !== toString(answer)) {
+    if (userAnswer !== answer) {
       say(`"${userAnswer}" is wrong answer ;(. Correct answer was "${answer}".`);
 
       say(`Let's try again, ${userName}!`);
