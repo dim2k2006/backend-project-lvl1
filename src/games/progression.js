@@ -1,4 +1,5 @@
 import random from 'lodash/random.js';
+import toString from 'lodash/toString.js';
 
 const placeholder = '..';
 
@@ -35,7 +36,7 @@ const game = ({
 
     const answer = start + step * randomIndex;
 
-    return { question, answer };
+    return { question, answer: toString(answer) };
   },
 });
 
