@@ -1,32 +1,27 @@
 import random from 'lodash/random.js';
-import find from 'lodash/find.js';
-import get from 'lodash/get.js';
+import keys from 'lodash/keys.js';
 import toString from 'lodash/toString.js';
 
-const operations = [
-  { operator: '+', process: (operand1, operand2) => operand1 + operand2 },
-  { operator: '-', process: (operand1, operand2) => operand1 - operand2 },
-  { operator: '*', process: (operand1, operand2) => operand1 * operand2 },
-];
+const operations = {
+  '+': (x, y) => x + y,
+  '-': (x, y) => x - y,
+  '*': (x, y) => x * y,
+};
 
-const getOperator = (id) => {
-  const item = operations[id];
+const getOperator = (index) => {
+  const operators = keys(operations);
 
-  const operator = get(item, 'operator');
+  const operator = operators[index];
 
-  if (!operator) throw new Error('Provide correct operator id.');
+  if (!operator) throw new Error('Invalid operator index.');
 
   return operator;
 };
 
-const genOperator = () => getOperator(random(0, operations.length - 1));
-
 const getProcess = (operator) => {
-  const item = find(operations, i => i.operator === operator);
+  const process = operations[operator];
 
-  const process = get(item, 'process');
-
-  if (!process) throw new Error('Provide correct operator.');
+  if (!process) throw new Error('Invalid operator type.');
 
   return process;
 };
@@ -42,7 +37,7 @@ const game = ({
   generateData: () => {
     const operand1 = random(1, 10);
     const operand2 = random(1, 10);
-    const operator = genOperator();
+    const operator = getOperator(random(0, keys(operations).length - 1));
     const question = `${operand1} ${operator} ${operand2}`;
     const answer = genAnswer(operand1, operand2, operator);
 
